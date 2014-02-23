@@ -6,7 +6,7 @@
      ====================================================================== -->
 <project name="build" default="compile">
 
-	<description>Black Rook Physics2D</description>
+	<description>Black Rook FileSystem</description>
 
 	<property file="build.properties" />
 
@@ -18,7 +18,7 @@
 	<property name="common.lib" value="${dev.base}/Common/bin" />
 
 	<!-- Project Info -->
-	<property name="project.archive" value="blackrook-fs" />
+	<property name="project.archive" value="blackrook-filesystem" />
 	<property name="project.javadoc.title" value="Black Rook FileSystem" />
 	<property name="project.classpath" value="${common.lib}" />
 	<property name="project.javadoc.packages" value="
