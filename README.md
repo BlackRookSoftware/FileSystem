@@ -1,8 +1,8 @@
 # Black Rook FileSystem
 
 Copyright (c) 2014 Black Rook Software. All rights reserved.  
-[http://blackrooksoftware.com/projects.htm?name=fs](http://blackrooksoftware.com/projects.htm?name=fs)  
-[https://github.com/BlackRookSoftware/FS](https://github.com/BlackRookSoftware/FS)
+[http://blackrooksoftware.com/projects.htm?name=filesystem](http://blackrooksoftware.com/projects.htm?name=filesystem)  
+[https://github.com/BlackRookSoftware/FileSystem](https://github.com/BlackRookSoftware/FileSystem)
 
 ### NOTICE
 
