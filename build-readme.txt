@@ -1,6 +1,6 @@
 ==============================================================================
 Building this Project
-Black Rook Physics2D Library
+Black Rook FileSystem Library
 (C) Black Rook Software, All rights reserved.
 http://www.blackrooksoftware.com
 ==============================================================================
