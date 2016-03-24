@@ -36,9 +36,6 @@ public class ZipArchive extends FSFileArchive
 	/** Table for file lookup. Maps file path to File object. */
 	protected HashMap<String,ZipEntry> fileLookupTable;
 	
-	/** Wrapper checksum. */
-	protected long folderChecksum;
-	
 	/** Zip file reference. */
 	protected ZipFile zipfileRef;
 	
@@ -98,8 +95,6 @@ public class ZipArchive extends FSFileArchive
 			ZipEntry entry = en.nextElement();
 			String path = entry.getName();
 			fileLookupTable.put(path,entry);
-			folderChecksum += path.hashCode();
-			folderChecksum += entry.getSize();
 		}
 	}
 	
@@ -163,12 +158,6 @@ public class ZipArchive extends FSFileArchive
 	}
 
 	@Override
-	public long getChecksum()
-	{
-		return folderChecksum;
-	}
-	
-	@Override
 	public boolean canCreateFiles()
 	{
 		return false;
@@ -180,11 +169,11 @@ public class ZipArchive extends FSFileArchive
 		throw new UnsupportedOperationException("You can't create files in this zip archive.");
 	}
 	
-	protected class ZipEntryFile extends FSFile
+	private class ZipEntryFile extends FSFile
 	{
 		protected ZipEntry zent;
 		
-		public ZipEntryFile(ZipEntry ze)
+		ZipEntryFile(ZipEntry ze)
 		{
 			zent = ze;
 		}

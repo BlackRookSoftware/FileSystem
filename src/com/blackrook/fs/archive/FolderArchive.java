@@ -36,9 +36,6 @@ public class FolderArchive extends FSFileArchive
 	/** Table for file lookup. Maps file path to File object. */
 	protected HashMap<String,File> fileLookupTable;
 	
-	/** Wrapper checksum. */
-	protected long folderChecksum;
-	
 	/**
 	 * Constructs a new folder archive from an abstract path. 
 	 * @param path	a path to a folder on the native file system.
@@ -84,8 +81,6 @@ public class FolderArchive extends FSFileArchive
 				if (file.isDirectory())
 					fileQueue.enqueue(file.listFiles());
 				fileLookupTable.put(fpath.replace(path+"/", ""),file);
-				folderChecksum += path.hashCode();
-				folderChecksum += file.length();
 			}
 		}
 	}
@@ -151,12 +146,6 @@ public class FolderArchive extends FSFileArchive
 	}
 
 	@Override
-	public long getChecksum()
-	{
-		return folderChecksum;
-	}
-	
-	@Override
 	public boolean canCreateFiles()
 	{
 		return true;
@@ -171,8 +160,6 @@ public class FolderArchive extends FSFileArchive
 		File d = new File(dest);
 		OutputStream osout = new FileOutputStream(d);
 		fileLookupTable.put(path.replaceAll("\\\\", "/"),d);
-		folderChecksum += path.hashCode();
-		folderChecksum += d.length();
 		return osout;
 	}
 

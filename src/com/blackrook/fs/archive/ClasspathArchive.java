@@ -100,12 +100,6 @@ public class ClasspathArchive extends FSFileArchive
 	}
 
 	@Override
-	public long getChecksum()
-	{
-		return 0;
-	}
-
-	@Override
 	public FSFile getFile(String path)
 	{
 		URL furl = classLoader.getResource(path);

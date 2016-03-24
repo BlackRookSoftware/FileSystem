@@ -45,6 +45,7 @@ public class FileSystem
 	/**
 	 * Removes an archive from the search stack.
 	 * @param fsfa	the archive to remove.
+	 * @return true if removed, false if not.
 	 */
 	public boolean removeArchive(FSFileArchive fsfa)
 	{
@@ -73,6 +74,7 @@ public class FileSystem
 	 * Retrieves a file from the system. Searches down the stack.
 	 * @param path	the file path.
 	 * @return		A reference to the file as an FSFile object, null if not found.
+	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public FSFile getFile(String path) throws IOException
 	{
@@ -91,6 +93,7 @@ public class FileSystem
 	 * @param path	the file path.
 	 * @return	A reference to the files as an FSFile array object. 
 	 * 			An empty array implies that no files were found.
+	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public FSFile[] getAllFileInstances(String path) throws IOException
 	{
@@ -110,6 +113,7 @@ public class FileSystem
 	/**
 	 * Retrieves all of the recent instances of a file from the system. Searches down the stack.
 	 * @return		A reference to the files as an FSFile array object.
+	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public FSFile[] getAllFiles() throws IOException
 	{
@@ -127,6 +131,7 @@ public class FileSystem
 	 * Retrieves all of the recent instances of the files within this system that pass the filter test as FSFile objects.
 	 * @param filter	the file filter to use.
 	 * @return		A reference to the files as an FSFile array object.
+	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public FSFile[] getAllFiles(FSFileFilter filter) throws IOException
 	{
@@ -144,6 +149,7 @@ public class FileSystem
 	 * Retrieves all of the recent instances of the files within this system that pass the filter test as FSFile objects.
 	 * @param path	the file path. Must be a directory.
 	 * @return		A reference to the files as an FSFile array object.
+	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public FSFile[] getAllFilesInDir(String path) throws IOException
 	{
@@ -162,6 +168,7 @@ public class FileSystem
 	 * @param path		the file path. Must be a directory.
 	 * @param filter	the file filter to use.
 	 * @return			A reference to the files as an FSFile array object.
+	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public FSFile[] getAllFilesInDir(String path, FSFileFilter filter) throws IOException
 	{
@@ -177,7 +184,9 @@ public class FileSystem
 	
 	/**
 	 * Creates a file in this system using the name and path provided.
+	 * @param path the path if the file to create.
 	 * @return	an acceptable OutputStream for filling the file with data, or null if no stream can be made.
+	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public OutputStream createFile(String path) throws IOException
 	{

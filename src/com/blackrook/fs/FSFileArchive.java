@@ -28,12 +28,14 @@ public abstract class FSFileArchive
 	 * @param path		the abstract path of a file inside this file.
 	 * @return			a new reference to the file requested, or null if the path
 	 * 					refers to a location that is not inside this file.
+	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public abstract FSFile getFile(String path) throws IOException;
 	
 	/**
 	 * Retrieves all of the files within this object as FSFile objects.
 	 * @return an array of FSFiles, each entry representing a particular file in this object.
+	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public abstract FSFile[] getAllFiles() throws IOException;
 
@@ -41,6 +43,7 @@ public abstract class FSFileArchive
 	 * Retrieves all of the files within a directory as FSFile objects.
 	 * @param path		the abstract path of a directory inside this file.
 	 * @return 		an array of FSFiles, each entry representing a particular file in this object.
+	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public abstract FSFile[] getAllFilesInDir(String path) throws IOException;
 
@@ -49,6 +52,7 @@ public abstract class FSFileArchive
 	 * @param path		the abstract path of a directory inside this file.
 	 * @param filter	the file filter to use.
 	 * @return 		an array of FSFiles, each entry representing a particular file in this object.
+	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public abstract FSFile[] getAllFilesInDir(String path, FSFileFilter filter) throws IOException;
 
@@ -56,14 +60,9 @@ public abstract class FSFileArchive
 	 * Retrieves all of the files within this object that pass the filter test as FSFile objects.
 	 * @param filter	the file filter to use.
 	 * @return			an array of FSFiles, each entry representing a particular file in this object.
+	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public abstract FSFile[] getAllFiles(FSFileFilter filter) throws IOException;
-
-	/**
-	 * Returns a checksum number of this archive's file contents. This should be a unique checksum
-	 * of this archive's files, one that would change if a file changed.
-	 */
-	public abstract long getChecksum();
 
 	/**
 	 * Can this archive create a new file within itself?
@@ -73,30 +72,44 @@ public abstract class FSFileArchive
 	
 	/**
 	 * Creates a file in this archive using the name and path provided.
+	 * @param path the path of the file to create.
 	 * @return	an acceptable OutputStream for filling the file with data.
 	 * @throws	UnsupportedOperationException if this is called on an archive that does not support writing.
+	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public abstract OutputStream createFile(String path) throws IOException;
 
-	/** Sets the name of this archive. */
+	/** 
+	 * Sets the name of this archive.
+	 * @param name the new archive name. 
+	 */
 	protected void setArchiveName(String name)
 	{
 		parentArchiveName = name;
 	}
 	
-	/** Sets the path of this archive. */
+	/** 
+	 * Sets the path of this archive. 
+	 * @param path the new archive name. 
+	 */
 	protected void setPath(String path)
 	{
 		parentArchivePath = path;
 	}
 
-	/** Gets the name of this archive. */
+	/** 
+	 * Gets the name of this archive. 
+	 * @return the archive name. 
+	 */
 	public String getArchiveName()
 	{
 		return parentArchiveName;
 	}
 	
-	/** Gets the path of this archive. */
+	/** 
+	 * Gets the path of this archive.
+	 * @return the path. 
+	 */
 	public String getPath()
 	{
 		return parentArchivePath;

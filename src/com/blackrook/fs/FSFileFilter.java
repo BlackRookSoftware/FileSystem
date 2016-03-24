@@ -13,6 +13,10 @@ package com.blackrook.fs;
  */
 public interface FSFileFilter
 {
-	/** Tests if a file is accepted by this filter. */
+	/** 
+	 * Tests if a file is accepted by this filter.
+	 * @param f the file to inspect.
+	 * @return true if accepted, false if not. 
+	 */
 	public boolean accept(FSFile f);
 }
