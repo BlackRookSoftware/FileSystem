@@ -146,7 +146,7 @@ public class FileSystem
 	}
 	
 	/**
-	 * Retrieves all of the recent instances of the files within this system that pass the filter test as FSFile objects.
+	 * Retrieves all of the recent instances of the files within this system as FSFile objects.
 	 * @param path	the file path. Must be a directory.
 	 * @return		A reference to the files as an FSFile array object.
 	 * @throws IOException if a read error occurs during the fetch.
@@ -184,9 +184,11 @@ public class FileSystem
 	
 	/**
 	 * Creates a file in this system using the name and path provided.
+	 * The file is created off of the topmost archive that can create files.
 	 * @param path the path if the file to create.
 	 * @return	an acceptable OutputStream for filling the file with data, or null if no stream can be made.
 	 * @throws IOException if a read error occurs during the fetch.
+	 * @see FSFileArchive#canCreateFiles()
 	 */
 	public OutputStream createFile(String path) throws IOException
 	{
