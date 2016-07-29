@@ -80,7 +80,8 @@ public class FolderArchive extends FSFileArchive
 				String fpath = file.getPath().replaceAll("\\\\", "/");
 				if (file.isDirectory())
 					fileQueue.enqueue(file.listFiles());
-				fileLookupTable.put(fpath.replace(path+"/", ""),file);
+				else
+					fileLookupTable.put(fpath.replace(path+"/", ""),file);
 			}
 		}
 	}
