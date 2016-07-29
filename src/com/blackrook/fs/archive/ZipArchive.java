@@ -94,7 +94,8 @@ public class ZipArchive extends FSFileArchive
 		{
 			ZipEntry entry = en.nextElement();
 			String path = entry.getName();
-			fileLookupTable.put(path,entry);
+			if (!entry.isDirectory())
+				fileLookupTable.put(path,entry);
 		}
 	}
 	
