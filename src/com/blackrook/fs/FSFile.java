@@ -80,22 +80,22 @@ public abstract class FSFile implements Comparable<FSFile>
 	}
 	
 	/**
-	 * @return the name of this file.
+	 * @return the name of this file in the file system.
 	 */
 	public abstract String getName();
 	
 	/**
-	 * @return the path of this file.
+	 * @return the path of this file from the root of the system.
 	 */
 	public abstract String getPath();
 
 	/**
-	 * @return the length of this file.
+	 * @return the length of this file in bytes.
 	 */
 	public abstract long length();
 
 	/**
-	 * @return the length of this file.
+	 * @return the date that this file was created/modified.
 	 */
 	public abstract long getDate();
 	
