@@ -200,7 +200,7 @@ public class FolderArchive extends FSFileArchive
 
 		public int compareTo(FSFile fsf)
 		{
-			return getName().compareTo(fsf.getName());
+			return getPath().compareTo(fsf.getPath());
 		}
 		
 		public String toString()

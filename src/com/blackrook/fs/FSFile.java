@@ -79,6 +79,31 @@ public abstract class FSFile implements Comparable<FSFile>
 		return getPath();
 	}
 	
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj instanceof FSFile)
+			return equals((FSFile)obj);
+		return super.equals(obj);
+	}
+	
+	/**
+	 * Checks if this file equals another file.
+	 * Compares using path.
+	 * @param file the other file.
+	 * @return true if equal, false if not.
+	 */
+	public boolean equals(FSFile file)
+	{
+		return compareTo(file) == 0;
+	}
+	
+	@Override
+	public int compareTo(FSFile file)
+	{
+		return getPath().compareTo(file.toString());
+	}
+	
 	/**
 	 * @return the name of this file in the file system.
 	 */
