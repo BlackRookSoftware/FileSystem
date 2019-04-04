@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 Black Rook Software
+ * Copyright (c) 2014-2019 Black Rook Software
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v2.1
  * which accompanies this distribution, and is available at
@@ -16,11 +16,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Iterator;
 
-import com.blackrook.commons.Common;
 import com.blackrook.commons.hash.CaseInsensitiveHashMap;
 import com.blackrook.commons.hash.HashMap;
 import com.blackrook.commons.linkedlist.Queue;
 import com.blackrook.commons.list.List;
+import com.blackrook.commons.util.FileUtils;
+import com.blackrook.commons.util.OSUtils;
 import com.blackrook.fs.FSFile;
 import com.blackrook.fs.FSFileArchive;
 import com.blackrook.fs.FSFileFilter;
@@ -61,7 +62,7 @@ public class FolderArchive extends FSFileArchive
 		setArchiveName(f.getName());
 		setPath(f.getPath());
 		
-		if (Common.isWindows())
+		if (OSUtils.isWindows())
 			fileLookupTable = new CaseInsensitiveHashMap<File>(10);
 		else
 			fileLookupTable = new HashMap<String,File>(10);
@@ -156,7 +157,7 @@ public class FolderArchive extends FSFileArchive
 	public OutputStream createFile(String path) throws IOException
 	{
 		String dest = getPath()+'/'+path;
-		if (!Common.createPathForFile(dest))
+		if (!FileUtils.createPathForFile(dest))
 			return null;
 		File d = new File(dest);
 		OutputStream osout = new FileOutputStream(d);

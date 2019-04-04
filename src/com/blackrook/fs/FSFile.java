@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 Black Rook Software
+ * Copyright (c) 2014-2019 Black Rook Software
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v2.1
  * which accompanies this distribution, and is available at
@@ -14,8 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import com.blackrook.commons.Common;
-
+import com.blackrook.commons.util.IOUtils;
 
 /**
  * This describes metadata of a file within a FileSystem.
@@ -68,8 +67,8 @@ public abstract class FSFile implements Comparable<FSFile>
 	{
 		InputStream in = getInputStream();
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		Common.relay(in, bos);
-		Common.close(in);
+		IOUtils.relay(in, bos);
+		IOUtils.close(in);
 		return bos.toByteArray();
 	}
 
