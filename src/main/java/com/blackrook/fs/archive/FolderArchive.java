@@ -14,18 +14,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 
-import com.blackrook.commons.hash.CaseInsensitiveHashMap;
-import com.blackrook.commons.hash.HashMap;
-import com.blackrook.commons.linkedlist.Queue;
-import com.blackrook.commons.list.List;
-import com.blackrook.commons.util.FileUtils;
-import com.blackrook.commons.util.OSUtils;
 import com.blackrook.fs.FSFile;
 import com.blackrook.fs.FSFileArchive;
 import com.blackrook.fs.FSFileFilter;
 import com.blackrook.fs.exception.FileSystemException;
+import com.blackrook.fs.util.Utils;
 
 /**
  * This is an FS wrapping class for wrapping a folder on the native file system.
@@ -35,7 +36,7 @@ import com.blackrook.fs.exception.FileSystemException;
 public class FolderArchive extends FSFileArchive
 {
 	/** Table for file lookup. Maps file path to File object. */
-	protected HashMap<String,File> fileLookupTable;
+	protected Map<String, File> fileLookupTable;
 	
 	/**
 	 * Constructs a new folder archive from an abstract path. 
@@ -62,25 +63,21 @@ public class FolderArchive extends FSFileArchive
 		setArchiveName(f.getName());
 		setPath(f.getPath());
 		
-		if (OSUtils.isWindows())
-			fileLookupTable = new CaseInsensitiveHashMap<File>(10);
-		else
-			fileLookupTable = new HashMap<String,File>(10);
-
+		this.fileLookupTable = new HashMap<String, File>(10);
 		
 		String path = getPath().replaceAll("\\\\", "/");
-		Queue<File[]> fileQueue = new Queue<File[]>();
-		fileQueue.enqueue(f.listFiles());
+		Queue<File[]> fileQueue = new LinkedList<File[]>();
+		fileQueue.add(f.listFiles());
 		while (!fileQueue.isEmpty())
 		{
-			File[] files = fileQueue.dequeue();
+			File[] files = fileQueue.poll();
 			for (File file : files)
 			{
 				if (file.isHidden())
 					continue;
 				String fpath = file.getPath().replaceAll("\\\\", "/");
 				if (file.isDirectory())
-					fileQueue.enqueue(file.listFiles());
+					fileQueue.add(file.listFiles());
 				else
 					fileLookupTable.put(fpath.replace(path+"/", ""),file);
 			}
@@ -99,8 +96,8 @@ public class FolderArchive extends FSFileArchive
 	@Override
 	public FSFile[] getAllFiles()
 	{
-		Iterator<File> it = fileLookupTable.valueIterator();
-		List<FolderFile> vect = new List<FolderFile>(fileLookupTable.size());
+		Iterator<File> it = fileLookupTable.values().iterator();
+		List<FolderFile> vect = new ArrayList<FolderFile>(fileLookupTable.size());
 		while (it.hasNext())
 			vect.add(new FolderFile(it.next()));
 		
@@ -112,8 +109,8 @@ public class FolderArchive extends FSFileArchive
 	@Override
 	public FSFile[] getAllFiles(FSFileFilter filter)
 	{
-		Iterator<File> it = fileLookupTable.valueIterator();
-		List<FolderFile> vect = new List<FolderFile>(fileLookupTable.size());
+		Iterator<File> it = fileLookupTable.values().iterator();
+		List<FolderFile> vect = new ArrayList<FolderFile>(fileLookupTable.size());
 		while (it.hasNext())
 		{
 			FolderFile f = new FolderFile(it.next());
@@ -136,7 +133,7 @@ public class FolderArchive extends FSFileArchive
 	public FSFile[] getAllFilesInDir(String path, FSFileFilter filter)
 	{
 		FSFile[] ff = getAllFilesInDir(path);
-		List<FSFile> v = new List<FSFile>(ff.length);
+		List<FSFile> v = new ArrayList<FSFile>(ff.length);
 		
 		for (FSFile f : ff)
 			if (filter.accept(f)) v.add(f);
@@ -157,7 +154,7 @@ public class FolderArchive extends FSFileArchive
 	public OutputStream createFile(String path) throws IOException
 	{
 		String dest = getPath()+'/'+path;
-		if (!FileUtils.createPathForFile(dest))
+		if (!Utils.createPathForFile(dest))
 			return null;
 		File d = new File(dest);
 		OutputStream osout = new FileOutputStream(d);

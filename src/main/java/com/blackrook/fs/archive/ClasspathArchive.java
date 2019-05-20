@@ -11,9 +11,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
-import com.blackrook.commons.list.List;
 import com.blackrook.fs.FSFile;
 import com.blackrook.fs.FSFileArchive;
 import com.blackrook.fs.FSFileFilter;
@@ -69,12 +70,9 @@ public class ClasspathArchive extends FSFileArchive
 	}
 
 	@Override
-	/**
-	 * This does not return any files.
-	 */
 	public FSFile[] getAllFilesInDir(String path) throws IOException
 	{
-		List<FSFile> flist = new List<FSFile>(25);
+		List<FSFile> flist = new ArrayList<FSFile>(25);
 		
 		Enumeration<URL> allFiles = classLoader.getResources(path);
 		while (allFiles.hasMoreElements())
@@ -89,7 +87,7 @@ public class ClasspathArchive extends FSFileArchive
 	public FSFile[] getAllFilesInDir(String path, FSFileFilter filter) throws IOException
 	{
 		FSFile[] ff = getAllFilesInDir(path);
-		List<FSFile> v = new List<FSFile>(ff.length);
+		List<FSFile> v = new ArrayList<FSFile>(ff.length);
 		
 		for (FSFile f : ff)
 			if (filter.accept(f)) v.add(f);

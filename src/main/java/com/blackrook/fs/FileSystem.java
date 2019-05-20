@@ -9,10 +9,11 @@ package com.blackrook.fs;
 
 import java.io.IOException;
 import java.io.OutputStream;
-
-import com.blackrook.commons.linkedlist.Stack;
-import com.blackrook.commons.list.List;
-import com.blackrook.commons.list.SortedList;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * This is a virtual file system layer for applications and 
@@ -23,19 +24,19 @@ import com.blackrook.commons.list.SortedList;
 public class FileSystem
 {
 	/** Lookup stack for file system. */
-	protected Stack<FSFileArchive> fileStack;
+	protected LinkedList<FSFileArchive> fileStack;
 	
 	/**
 	 * Creates and initializes a new FileSystem.
 	 */
 	public FileSystem()
 	{
-		fileStack = new Stack<FSFileArchive>();
+		fileStack = new LinkedList<>();
 	}
 	
 	/**
 	 * Adds an archive to the bottom of the search stack.
-	 * @param fsfa	the archive to add.
+	 * @param fsfa the archive to add.
 	 */
 	public void addArchive(FSFileArchive fsfa)
 	{
@@ -44,7 +45,7 @@ public class FileSystem
 	
 	/**
 	 * Removes an archive from the search stack.
-	 * @param fsfa	the archive to remove.
+	 * @param fsfa the archive to remove.
 	 * @return true if removed, false if not.
 	 */
 	public boolean removeArchive(FSFileArchive fsfa)
@@ -54,7 +55,7 @@ public class FileSystem
 	
 	/**
 	 * Pushes an archive onto the search stack.
-	 * @param fsfa	the archive to push.
+	 * @param fsfa the archive to push.
 	 */
 	public void pushArchive(FSFileArchive fsfa)
 	{
@@ -63,7 +64,7 @@ public class FileSystem
 	
 	/**
 	 * Pops an archive off of the search stack.
-	 * @return	what used to be the topmost archive on the stack.
+	 * @return what used to be the topmost archive on the stack.
 	 */
 	public FSFileArchive popArchive()
 	{
@@ -72,8 +73,8 @@ public class FileSystem
 	
 	/**
 	 * Retrieves a file from the system. Searches down the stack.
-	 * @param path	the file path.
-	 * @return		A reference to the file as an FSFile object, null if not found.
+	 * @param path the file path.
+	 * @return A reference to the file as an FSFile object, null if not found.
 	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public FSFile getFile(String path) throws IOException
@@ -90,14 +91,14 @@ public class FileSystem
 
 	/**
 	 * Retrieves all of the instances of a file from the system. Searches down the stack.
-	 * @param path	the file path.
-	 * @return	A reference to the files as an FSFile array object. 
-	 * 			An empty array implies that no files were found.
+	 * @param path the file path.
+	 * @return A reference to the files as an FSFile array object. 
+	 * 		An empty array implies that no files were found.
 	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public FSFile[] getAllFileInstances(String path) throws IOException
 	{
-		List<FSFile> v = new List<FSFile>(10);
+		List<FSFile> v = new ArrayList<FSFile>(10);
 		for (FSFileArchive a : fileStack)
 		{
 			FSFile f = a.getFile(path);
@@ -112,36 +113,36 @@ public class FileSystem
 
 	/**
 	 * Retrieves all of the recent instances of a file from the system. Searches down the stack.
-	 * @return		A reference to the files as an FSFile array object.
+	 * @return A reference to the files as an FSFile array object.
 	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public FSFile[] getAllFiles() throws IOException
 	{
-		SortedList<FSFile> v = new SortedList<FSFile>(50);
+		Set<FSFile> set = new HashSet<FSFile>(50);
 		for (FSFileArchive a : fileStack)
 			for (FSFile f : a.getAllFiles())
-				if (!v.contains(f)) v.add(f);
+				if (!set.contains(f)) set.add(f);
 		
-		FSFile[] out = new FSFile[v.size()];
-		v.toArray(out);
+		FSFile[] out = new FSFile[set.size()];
+		set.toArray(out);
 		return out;
 	}
 	
 	/**
 	 * Retrieves all of the recent instances of the files within this system that pass the filter test as FSFile objects.
-	 * @param filter	the file filter to use.
-	 * @return		A reference to the files as an FSFile array object.
+	 * @param filter the file filter to use.
+	 * @return A reference to the files as an FSFile array object.
 	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public FSFile[] getAllFiles(FSFileFilter filter) throws IOException
 	{
-		SortedList<FSFile> v = new SortedList<FSFile>(50);
+		Set<FSFile> set = new HashSet<>();
 		for (FSFileArchive a : fileStack)
 			for (FSFile f : a.getAllFiles(filter))
-				if (!v.contains(f)) v.add(f);
+				if (!set.contains(f)) set.add(f);
 		
-		FSFile[] out = new FSFile[v.size()];
-		v.toArray(out);
+		FSFile[] out = new FSFile[set.size()];
+		set.toArray(out);
 		return out;
 	}
 	
@@ -153,7 +154,7 @@ public class FileSystem
 	 */
 	public FSFile[] getAllFilesInDir(String path) throws IOException
 	{
-		SortedList<FSFile> v = new SortedList<FSFile>(50);
+		Set<FSFile> v = new HashSet<>();
 		for (FSFileArchive a : fileStack)
 			for (FSFile f : a.getAllFilesInDir(path))
 				if (!v.contains(f)) v.add(f);
@@ -165,14 +166,14 @@ public class FileSystem
 	
 	/**
 	 * Retrieves all of the recent instances of the files within this system that pass the filter test as FSFile objects.
-	 * @param path		the file path. Must be a directory.
-	 * @param filter	the file filter to use.
-	 * @return			A reference to the files as an FSFile array object.
+	 * @param path the file path. Must be a directory.
+	 * @param filter the file filter to use.
+	 * @return A reference to the files as an FSFile array object.
 	 * @throws IOException if a read error occurs during the fetch.
 	 */
 	public FSFile[] getAllFilesInDir(String path, FSFileFilter filter) throws IOException
 	{
-		SortedList<FSFile> v = new SortedList<FSFile>(50);
+		Set<FSFile> v = new HashSet<>();
 		for (FSFileArchive a : fileStack)
 			for (FSFile f : a.getAllFilesInDir(path,filter))
 				if (!v.contains(f)) v.add(f);
@@ -186,7 +187,7 @@ public class FileSystem
 	 * Creates a file in this system using the name and path provided.
 	 * The file is created off of the topmost archive that can create files.
 	 * @param path the path if the file to create.
-	 * @return	an acceptable OutputStream for filling the file with data, or null if no stream can be made.
+	 * @return an acceptable OutputStream for filling the file with data, or null if no stream can be made.
 	 * @throws IOException if a read error occurs during the fetch.
 	 * @see FSFileArchive#canCreateFiles()
 	 */

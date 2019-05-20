@@ -1,7 +1,6 @@
 # Black Rook FileSystem
 
 Copyright (c) 2014-2019 Black Rook Software. All rights reserved.  
-[http://blackrooksoftware.com/projects.htm?name=filesystem](http://blackrooksoftware.com/projects.htm?name=filesystem)  
 [https://github.com/BlackRookSoftware/FileSystem](https://github.com/BlackRookSoftware/FileSystem)
 
 ### NOTICE
@@ -11,8 +10,7 @@ may change many times in different ways over the course of its development!
 
 ### Required Libraries
 
-Black Rook Commons 2.16.0+  
-[https://github.com/BlackRookSoftware/Common](https://github.com/BlackRookSoftware/Common)
+NONE
 
 ### Required Java Modules
 
@@ -55,3 +53,5 @@ http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 A copy of the LGPL should have been included in this release (LICENSE.txt).
 If it was not, please contact us for a copy, or to notify us of a distribution
 that has not included it. 
+
+This contains code copied from Black Rook Base, under the terms of the MIT License (docs/LICENSE-BlackRookBase.txt).

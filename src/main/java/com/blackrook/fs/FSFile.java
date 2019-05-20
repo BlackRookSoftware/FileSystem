@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import com.blackrook.commons.util.IOUtils;
+import com.blackrook.fs.util.Utils;
 
 /**
  * This describes metadata of a file within a FileSystem.
@@ -67,8 +67,8 @@ public abstract class FSFile implements Comparable<FSFile>
 	{
 		InputStream in = getInputStream();
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		IOUtils.relay(in, bos);
-		IOUtils.close(in);
+		Utils.relay(in, bos);
+		Utils.close(in);
 		return bos.toByteArray();
 	}
 

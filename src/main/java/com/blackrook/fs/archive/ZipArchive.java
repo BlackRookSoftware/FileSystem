@@ -12,15 +12,16 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
-import com.blackrook.commons.hash.CaseInsensitiveHashMap;
-import com.blackrook.commons.hash.HashMap;
-import com.blackrook.commons.list.List;
 import com.blackrook.fs.FSFile;
 import com.blackrook.fs.FSFileArchive;
 import com.blackrook.fs.FSFileFilter;
@@ -32,9 +33,8 @@ import com.blackrook.fs.exception.FileSystemException;
  */
 public class ZipArchive extends FSFileArchive
 {
-	
 	/** Table for file lookup. Maps file path to File object. */
-	protected HashMap<String,ZipEntry> fileLookupTable;
+	protected Map<String, ZipEntry> fileLookupTable;
 	
 	/** Zip file reference. */
 	protected ZipFile zipfileRef;
@@ -75,19 +75,13 @@ public class ZipArchive extends FSFileArchive
 	 */
 	public ZipArchive(ZipFile f) throws ZipException, IOException
 	{
-		zipfileRef = f;
+		this.zipfileRef = f;
 		
 		String fname = f.getName();
 		setArchiveName(fname.indexOf(File.separator) >= 0 ? fname.substring(fname.indexOf(File.separator)+1) : fname);
 		setPath(fname);
-		
-		// Windows file systems are case-insensitive.
-		boolean windows = System.getProperty("os.name").contains("Windows");
-		
-		if (windows)
-			fileLookupTable = new CaseInsensitiveHashMap<ZipEntry>(10);
-		else
-			fileLookupTable = new HashMap<String,ZipEntry>(10);
+				
+		this.fileLookupTable = new HashMap<String,ZipEntry>(10);
 
 		Enumeration<? extends ZipEntry> en = zipfileRef.entries(); 
 		while (en.hasMoreElements())
@@ -95,7 +89,7 @@ public class ZipArchive extends FSFileArchive
 			ZipEntry entry = en.nextElement();
 			String path = entry.getName();
 			if (!entry.isDirectory())
-				fileLookupTable.put(path,entry);
+				this.fileLookupTable.put(path,entry);
 		}
 	}
 	
@@ -110,8 +104,8 @@ public class ZipArchive extends FSFileArchive
 
 	public FSFile[] getAllFiles()
 	{
-		Iterator<ZipEntry> it = fileLookupTable.valueIterator();
-		List<ZipEntryFile> vect = new List<ZipEntryFile>(fileLookupTable.size());
+		Iterator<ZipEntry> it = fileLookupTable.values().iterator();
+		List<ZipEntryFile> vect = new ArrayList<ZipEntryFile>(fileLookupTable.size());
 		while (it.hasNext())
 			vect.add(new ZipEntryFile(it.next()));
 		
@@ -123,8 +117,8 @@ public class ZipArchive extends FSFileArchive
 	@Override
 	public FSFile[] getAllFiles(FSFileFilter filter)
 	{
-		Iterator<ZipEntry> it = fileLookupTable.valueIterator();
-		List<ZipEntryFile> vect = new List<ZipEntryFile>(fileLookupTable.size());
+		Iterator<ZipEntry> it = fileLookupTable.values().iterator();
+		List<ZipEntryFile> vect = new ArrayList<ZipEntryFile>(fileLookupTable.size());
 		while (it.hasNext())
 		{
 			ZipEntryFile f = new ZipEntryFile(it.next());
@@ -147,7 +141,7 @@ public class ZipArchive extends FSFileArchive
 	public FSFile[] getAllFilesInDir(String path, FSFileFilter filter)
 	{
 		FSFile[] ff = getAllFilesInDir(path);
-		List<FSFile> v = new List<FSFile>(ff.length);
+		List<FSFile> v = new ArrayList<FSFile>(ff.length);
 		
 		for (FSFile f : ff)
 			if (filter.accept(f)) v.add(f);

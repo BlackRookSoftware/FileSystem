@@ -15,43 +15,31 @@
 	<property name="S" value="${path.separator}" />
 
 	<!-- Project Libs -->
-	<property name="common.lib" value="${dev.base}/Common/bin" />
-
+	
 	<!-- Project Info -->
-	<property name="project.archive" value="blackrook-filesystem" />
+	<property name="project.archive" value="blackrook-fs" />
 	<property name="project.javadoc.title" value="Black Rook FileSystem" />
-	<property name="project.classpath" value="${common.lib}" />
+	<property name="project.classpath" value=""/>
+	<property name="project.testclass" value=""/>
+	<property name="project.testclass.main" value=""/>
 	<property name="project.javadoc.packages" value="
 		com.blackrook.fs,
 		com.blackrook.fs.archive,
 		com.blackrook.fs.exception,
+		com.blackrook.fs.util
 		"
 	/>
-
+	
 	<import file="build-import.xml" />
-	<import file="build-dependencies.xml" />
-
-	<target name="dependency.common">
-		<git-export repository="https://github.com/BlackRookSoftware/Common" dest="${dependencies.dir}/Common" />
-		<ant antfile="${dependencies.dir}/Common/build.xml" useNativeBasedir="true" inheritAll="false" target="compile" />
-	</target>
-	<target name="dependency.properties">
-		<echo message="Writing to build.properties...." />
-		<echo message="dev.base=${dependencies.dir}&#10;" file="build.properties" append="true" />
-	</target>
-
-	<target name="dependencies" depends="init.dependencies, dependency.common, dependency.properties" description="Downloads and compiles the dependencies.">
-	</target>
 
 	<target name="javadoc" depends="init.docs" description="Builds the documentation.">
         <javadoc access="protected" 
         	additionalparam="-J-Xmx512m  " author="true" 
-        	classpath="${project.classpath}${path.separator}${bin.dir}" 
+        	classpath="${bin.dir}" 
         	doctitle="${project.javadoc.title}" 
         	sourcepath="${src.dir}" 
         	packagenames="${project.javadoc.packages}"
         	destdir="${docs.dir}" 
-    		source="1.8" 
         	splitindex="true" 
         	use="true" 
         	version="true" 
@@ -61,8 +49,7 @@
         	nonavbar="false" 
         	notree="false"
     		>
-        	<link href="https://blackrooksoftware.com/docs/common/" packagelistloc="element-list"/>
-            <link href="https://docs.oracle.com/javase/10/docs/api/" packagelistloc="element-list"/>
+            <link href="https://docs.oracle.com/en/java/javase/11/docs/api/"/>
         </javadoc>
     </target>	
 
