@@ -14,7 +14,7 @@ NONE
 
 ### Required Java Modules
 
-[java.base](https://docs.oracle.com/javase/10/docs/api/java.base-summary.html)  
+[java.base](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/module-summary.html)  
 
 ### Introduction
 
@@ -27,22 +27,34 @@ Contained in this release is a set of classes for the creation of a virtual file
 
 ### Compiling with Ant
 
-To download the dependencies for this project (if you didn't set that up yourself already), type:
-
-	ant dependencies
-
-A *build.properties* file will be created/appended to with the *dev.base* property set.
-	
 To compile this library with Apache Ant, type:
 
 	ant compile
 
-To make a JAR of this library, type:
+To make Maven-compatible JARs of this library (placed in the *build/jar* directory), type:
 
 	ant jar
 
-And it will be placed in the *build/jar* directory.
+To make Javadocs (placed in the *build/docs* directory):
 
+	ant javadoc
+
+To compile main and test code and run tests (if any):
+
+	ant test
+
+To make Zip archives of everything (main src/resources, bin, javadocs, placed in the *build/zip* directory):
+
+	ant zip
+
+To compile, JAR, test, and Zip up everything:
+
+	ant release
+
+To clean up everything:
+
+	ant clean
+	
 ### Other
 
 This program and the accompanying materials
