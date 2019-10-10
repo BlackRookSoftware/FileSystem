@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import com.blackrook.fs.util.Utils;
+import com.blackrook.fs.struct.Utils;
 
 /**
  * This describes metadata of a file within a FileSystem.

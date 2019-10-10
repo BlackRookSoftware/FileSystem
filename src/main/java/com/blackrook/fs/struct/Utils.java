@@ -1,4 +1,4 @@
-package com.blackrook.fs.util;
+package com.blackrook.fs.struct;
 
 import java.io.File;
 import java.io.IOException;

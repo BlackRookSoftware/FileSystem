@@ -26,7 +26,7 @@
 		com.blackrook.fs,
 		com.blackrook.fs.archive,
 		com.blackrook.fs.exception,
-		com.blackrook.fs.util
+		com.blackrook.fs.struct
 		"
 	/>
 	
