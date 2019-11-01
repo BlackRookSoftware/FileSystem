@@ -3,6 +3,8 @@
 Copyright (c) 2014-2019 Black Rook Software. All rights reserved.  
 [https://github.com/BlackRookSoftware/FileSystem](https://github.com/BlackRookSoftware/FileSystem)
 
+[Latest Release](https://github.com/BlackRookSoftware/FileSystem/releases/latest)
+
 ### NOTICE
 
 This library is currently in **EXPERIMENTAL** status. This library's API
@@ -55,6 +57,10 @@ To clean up everything:
 
 	ant clean
 	
+### Javadocs
+
+Online Javadocs can be found at: [https://blackrooksoftware.github.io/FileSystem/javadoc/](https://blackrooksoftware.github.io/FileSystem/javadoc/)
+
 ### Other
 
 This program and the accompanying materials
