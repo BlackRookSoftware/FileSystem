@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
  ******************************************************************************/
-package com.blackrook.fs.exception;
+package com.blackrook.fs;
 
 /**
  * Excption class that is thrown if something bad happens inside the file system.

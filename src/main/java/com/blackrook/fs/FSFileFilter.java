@@ -11,6 +11,7 @@ package com.blackrook.fs;
  * File filter interface for FileSystem stuff.
  * @author Matthew Tropiano
  */
+@FunctionalInterface
 public interface FSFileFilter
 {
 	/** 

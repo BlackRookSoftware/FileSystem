@@ -31,7 +31,7 @@ public class FileSystem
 	 */
 	public FileSystem()
 	{
-		fileStack = new LinkedList<>();
+		this.fileStack = new LinkedList<>();
 	}
 	
 	/**

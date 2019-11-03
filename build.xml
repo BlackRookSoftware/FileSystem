@@ -26,7 +26,6 @@
 	<property name="project.javadoc.packages" value="
 		com.blackrook.fs,
 		com.blackrook.fs.archive,
-		com.blackrook.fs.exception,
 		com.blackrook.fs.struct
 		"
 	/>

@@ -25,7 +25,7 @@ import java.util.zip.ZipFile;
 import com.blackrook.fs.FSFile;
 import com.blackrook.fs.FSFileArchive;
 import com.blackrook.fs.FSFileFilter;
-import com.blackrook.fs.exception.FileSystemException;
+import com.blackrook.fs.FileSystemException;
 
 /**
  * This is an FS wrapping class for wrapping a zip file on the native file system. 

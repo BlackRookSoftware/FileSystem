@@ -25,7 +25,7 @@ import java.util.Queue;
 import com.blackrook.fs.FSFile;
 import com.blackrook.fs.FSFileArchive;
 import com.blackrook.fs.FSFileFilter;
-import com.blackrook.fs.exception.FileSystemException;
+import com.blackrook.fs.FileSystemException;
 import com.blackrook.fs.struct.Utils;
 
 /**
