@@ -3,7 +3,7 @@
 Copyright (c) 2014-2019 Black Rook Software. All rights reserved.  
 [https://github.com/BlackRookSoftware/FileSystem](https://github.com/BlackRookSoftware/FileSystem)
 
-[Latest Release](https://github.com/BlackRookSoftware/FileSystem/releases/latest)
+[Latest Release](https://github.com/BlackRookSoftware/FileSystem/releases/latest)  
 [Online Javadoc](https://blackrooksoftware.github.io/FileSystem/javadoc/)  
 
 
