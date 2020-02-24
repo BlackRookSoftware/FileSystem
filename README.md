@@ -1,16 +1,11 @@
 # Black Rook FileSystem
 
-Copyright (c) 2014-2019 Black Rook Software. All rights reserved.  
+Copyright (c) 2014-2020 Black Rook Software. All rights reserved.  
 [https://github.com/BlackRookSoftware/FileSystem](https://github.com/BlackRookSoftware/FileSystem)
 
 [Latest Release](https://github.com/BlackRookSoftware/FileSystem/releases/latest)  
 [Online Javadoc](https://blackrooksoftware.github.io/FileSystem/javadoc/)  
 
-
-### NOTICE
-
-This library is currently in **EXPERIMENTAL** status. This library's API
-may change many times in different ways over the course of its development!
 
 ### Required Libraries
 
