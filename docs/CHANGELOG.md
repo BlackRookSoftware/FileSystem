@@ -1,4 +1,4 @@
-FileSystem (C) Black Rook Software 2019 
+FileSystem (C) Black Rook Software 2020
 =======================================
 by Matt Tropiano et al. (see AUTHORS.txt)
 
