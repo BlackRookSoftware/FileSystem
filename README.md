@@ -1,6 +1,6 @@
 # Black Rook FileSystem
 
-Copyright (c) 2014-2020 Black Rook Software. All rights reserved.  
+Copyright (c) 2014-2020 Black Rook Software.  
 [https://github.com/BlackRookSoftware/FileSystem](https://github.com/BlackRookSoftware/FileSystem)
 
 [Latest Release](https://github.com/BlackRookSoftware/FileSystem/releases/latest)  
