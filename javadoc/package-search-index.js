@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.blackrook.fs"},{"l":"com.blackrook.fs.archive"},{"l":"com.blackrook.fs.struct"}]
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html","k":"18"},{"l":"com.blackrook.fs"},{"l":"com.blackrook.fs.archive"},{"l":"com.blackrook.fs.struct"}];updateSearchResults();
