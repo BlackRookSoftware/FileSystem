@@ -15,6 +15,11 @@ NONE
 
 [java.base](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/module-summary.html)  
 
+### Where to Get
+
+* [Maven Central](https://central.sonatype.com/artifact/com.blackrooksoftware/filesystem)  
+* [GitHub Releases](https://github.com/BlackRookSoftware/FileSystem/releases/latest)
+
 ### Introduction
 
 This library simulates a Quake-like filesystem for loading resources via a 
@@ -24,36 +29,37 @@ virtual file stack.
 
 Contained in this release is a set of classes for the creation of a virtual file system.
 
-### Compiling with Ant
+### Compiling with Maven
 
-To compile this library with Apache Ant, type:
+To install/compile this library and make all artifacts with Apache Maven, type:
 
-	ant compile
+	mvn install
 
-To make Maven-compatible JARs of this library (placed in the *build/jar* directory), type:
+To compile this library, type:
 
-	ant jar
+	mvn compile
 
-To make Javadocs (placed in the *build/docs* directory):
+To make Maven-compatible JARs of this library, type:
 
-	ant javadoc
+	mvn jar:jar
 
-To compile main and test code and run tests (if any):
+To make Javadocs:
 
-	ant test
+	mvn javadoc:javadoc
 
-To make Zip archives of everything (main src/resources, bin, javadocs, placed in the *build/zip* directory):
+To run tests, type:
 
-	ant zip
+	mvn test
 
-To compile, JAR, test, and Zip up everything:
+To generate a coverage report, type:
 
-	ant release
+	mvn test jacoco:report
 
 To clean up everything:
 
-	ant clean
-	
+	mvn clean
+
+
 ### Javadocs
 
 Online Javadocs can be found at: [https://blackrooksoftware.github.io/FileSystem/javadoc/](https://blackrooksoftware.github.io/FileSystem/javadoc/)
